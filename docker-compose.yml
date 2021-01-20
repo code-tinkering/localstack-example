@@ -1,0 +1,17 @@
+version: '2.2'
+services:
+  localstack:
+    container_name: "LocalStack-Demo"
+    image: localstack/localstack
+    network_mode: bridge
+    ports:
+      - "4566:4566" # Edge Port
+      - "4569:4569" # Dynamo DB Port
+      - "4571:4571" # Elasticsearch Port
+      - "4572:4572" # S3 Port
+      - "4574:4574" # Lambda Port
+      - "8080:8080" # Web-UI Port
+    environment:
+      - SERVICES=serverless
+      - DOCKER_HOST=unix:///var/run/docker.sock
+      - LAMBDA_EXECUTOR=${LAMBDA_EXECUTOR- }
